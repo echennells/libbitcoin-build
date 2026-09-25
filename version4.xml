@@ -69,6 +69,14 @@
       <dependency name="UltrafastSecp256k1" version="4.0.0.0" option="ultrafast" />
 
       <compiler standard="20">
+        <define option="ultrafast"
+          comment="Use shrec/UltrafastSecp256k1 library."
+          type="public">
+          <symbol value="WITH_ULTRAFAST">
+            <substitute name="ultrafast" />
+          </symbol>
+        </define>
+
         <flag option="avx2"
           comment="Conditionally require avx2 intrinsics."
           type="public"
@@ -2363,9 +2371,8 @@
       <build method="cmake" filepath="." objpath="." parallel="true">
 
         <!-- enable necessary features -->
-        <option value="-DSECP256K1_BUILD_CABI=ON" />
         <option value="-DSECP256K1_BUILD_CPU=ON" />
-        <option value="-DSECP256K1_BUILD_SHIM=ON" />
+        <option value="-DSECP256K1_BUILD_LIBBITCOIN=ON" />
         <option value="-DSECP256K1_USE_ULTRAFAST=ON" />
 
         <!-- hardware support options -->
@@ -2393,7 +2400,7 @@
       </build>
       <cmake namespace="secp256k1" package="secp256k1-fast"
         target="secp256k1::fastsecp256k1" />
-      <pkg name="secp256k1-fast" />
+      <pkg name="secp256k1-fast-libbitcoin" />
     </dependency>
     <dependency name="secp256k1"
       textname="libsecp256k1"
